@@ -22,6 +22,16 @@ Jede Übung hat eine leichtere Alternative (Stufe „Leicht“, z. B. Knie-Liege
 
 Die App schlägt jeden Tag eine Variante vor: Nach einem Oberkörper-Tag kommt „Beine & Core“, damit die Schultern Pause bekommen, sonst die Variante, die am längsten nicht dran war. Du kannst aber jederzeit selbst wählen.
 
+## Drei Bereiche
+
+- **Training:** das komplette 30-Minuten-Workout mit Varianten, Rekorden und Verlauf
+- **Dehnen:** eigene Programme für Ruhetage – Ganzkörper (10 Min), Oberkörper (6 Min), Hüfte & Beine (7 Min). Zählt nicht als Trainingstag, der Streak bleibt unberührt.
+- **Skills:** Schritt-für-Schritt-Wege zu Handstand, Muscle-up, Human Flag und Backflip. Abgehakte Schritte werden gespeichert.
+
+## Animationen
+
+Jede Übung wird von einer animierten Figur vorgemacht – beim Aufwärmen, im AMRAP, beim Dehnen und bei den Skills. Beim Dehnen zeigt ein **gelber Punkt**, wo du die Dehnung spüren solltest. Antippen einer Übung öffnet die Erklärung auch vor dem Training.
+
 ## Funktionen
 
 - **Streak:** zählt deine Trainingstage in Folge – bis zu 2 Ruhetage dazwischen sind erlaubt

@@ -157,12 +157,25 @@ h1,h2,h3,p{margin:0}
 .t-eyebrow{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .t-name{font-family:var(--display);font-weight:800;font-size:clamp(34px,10.5vw,58px);line-height:.95;text-transform:uppercase;text-wrap:balance;letter-spacing:.01em}
 .t-how{font-size:17px;line-height:1.4;color:var(--text);opacity:.82;max-width:32ch;text-wrap:pretty}
-.ring{position:relative;width:min(60vw,30vh,300px);aspect-ratio:1;max-width:100%;flex:none}
-.ring svg{display:block;width:100%;height:100%;transform:rotate(-90deg)}
-.ring circle{fill:none;stroke-width:11}
-.ring .track{stroke:var(--line)}
-.ring .prog{stroke:var(--phase);stroke-linecap:round;transition:stroke-dashoffset .1s linear}
-.ring-num{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:clamp(60px,min(22vw,12vh),124px);line-height:1;font-variant-numeric:tabular-nums}
+.stage{position:relative;width:100%;max-width:380px;height:clamp(150px,30vh,300px);flex:none;background:var(--surface);border-radius:20px;overflow:hidden}
+.count{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;max-width:380px}
+.count-num{font-family:var(--display);font-weight:800;font-size:clamp(54px,min(20vw,10vh),112px);line-height:.85;font-variant-numeric:tabular-nums}
+.count-bar{width:100%;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.count-bar i{display:block;height:100%;width:0;background:var(--phase)}
+
+/* ---------- Figuren ---------- */
+.fig{display:block;width:100%;height:100%}
+.fig polyline,.fig path{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:5.5}
+.fig-near polyline,.fig-near path{stroke:var(--text)}
+.fig-near circle{fill:var(--text)}
+.fig-far polyline{stroke:var(--faint)}
+.fig.fv .fig-far polyline{stroke:var(--text)}
+.fig-gnd{stroke:var(--line);stroke-width:1.5}
+.fig-prop{fill:var(--raised);stroke:var(--faint);stroke-width:1.2}
+line.fig-prop{stroke-width:3;stroke-linecap:round}
+.fig-focus{fill:var(--accent);opacity:.3;transform-box:fill-box;transform-origin:center;animation:focus 1.6s ease-in-out infinite}
+@keyframes focus{50%{opacity:.62;transform:scale(1.3)}}
+.thumb{width:64px;height:54px;flex:none;background:var(--raised);border-radius:12px;overflow:hidden}
 .t-next{font-size:15px;color:var(--muted)}
 .t-next b{color:var(--text);font-weight:600}
 .t-tip{font-size:13.5px;color:var(--accent);max-width:34ch}
@@ -223,7 +236,72 @@ h1,h2,h3,p{margin:0}
 .done .rest{text-align:left;width:100%}
 .done .btn-primary{margin-top:8px}
 
+/* ---------- Tabs & Bereiche ---------- */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:4;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;margin-block:-8px;background:var(--surface);border-radius:999px;box-shadow:0 0 0 8px var(--bg)}
+.tabs button{padding:11px 6px;border-radius:999px;font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.panel{display:flex;flex-direction:column;gap:26px}
+.howto{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.howto .lbl{width:100%}
+.chip-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:999px;background:var(--raised);font-size:14px;font-weight:600}
+.chip-btn svg{width:15px;height:15px;color:var(--accent)}
+
+.progs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.prog{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:12px 12px 13px;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-card)}
+.prog[aria-checked="true"]{border-color:var(--accent);background:linear-gradient(var(--accent-soft),var(--accent-soft)),var(--surface)}
+.prog b{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;font-variant-numeric:tabular-nums}
+.prog[aria-checked="true"] b{color:var(--accent)}
+.prog b small{font-size:15px;font-weight:700;margin-left:2px}
+.prog span{font-size:14px;font-weight:600;line-height:1.2}
+.ex-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.ex{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:8px 12px 8px 8px;background:var(--surface);border-radius:var(--r-card)}
+.ex-txt{flex:1;min-width:0}
+.ex-txt strong{display:block;font-weight:600;font-size:16px;line-height:1.25}
+.ex-txt span{display:block;font-size:13.5px;color:var(--muted);margin-top:2px}
+.ex-dur{font-family:var(--display);font-weight:700;font-size:20px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+.skills{display:flex;flex-direction:column;gap:12px}
+.skill{background:var(--surface);border-radius:var(--r-card);overflow:hidden}
+.skill-head{display:flex;align-items:center;gap:14px;width:100%;padding:10px 14px 10px 10px;text-align:left}
+.skill-head .thumb{width:84px;height:72px}
+.skill-txt{flex:1;min-width:0}
+.skill-txt strong{display:block;font-family:var(--display);font-weight:800;font-size:26px;line-height:1;text-transform:uppercase;letter-spacing:.02em}
+.skill-txt span{display:block;font-size:14px;color:var(--muted);margin-top:4px}
+.skill-bar{height:5px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:8px}
+.skill-bar i{display:block;height:100%;background:var(--accent)}
+.skill-chev{width:22px;height:22px;color:var(--muted);transition:transform .2s;flex:none}
+.skill[data-open="true"] .skill-chev{transform:rotate(180deg)}
+.skill-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:8px}
+.skill-note{font-size:14px;color:var(--accent);line-height:1.4}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.step{display:flex;align-items:center;gap:12px;padding:10px 10px 10px 12px;border-radius:12px;background:var(--raised)}
+.step.now{box-shadow:inset 0 0 0 1.5px var(--accent)}
+.step.done .step-txt strong{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--faint)}
+.step-check{width:30px;height:30px;border-radius:50%;flex:none;border:2px solid var(--faint);display:grid;place-items:center;color:var(--accent-ink)}
+.step-check svg{width:16px;height:16px;opacity:0}
+.step.done .step-check{background:var(--accent);border-color:var(--accent)}
+.step.done .step-check svg{opacity:1}
+.step-txt{flex:1;min-width:0}
+.step-txt strong{display:block;font-size:15.5px;font-weight:600;line-height:1.25}
+.step-txt span{display:block;font-size:13.5px;color:var(--muted);margin-top:2px}
+.step-txt em{font-style:normal;color:var(--accent);font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.step-view{padding:7px 11px;border-radius:999px;background:var(--surface);font-size:13px;font-weight:600;flex:none}
+
+.moves .mini{width:100%;height:54px}
+
+/* ---------- Erklär-Fenster ---------- */
+.sheet-bg{position:fixed;inset:0;z-index:30;background:rgba(8,10,13,.72);display:flex;align-items:flex-end;justify-content:center}
+.sheet{position:relative;width:100%;max-width:560px;max-height:92%;overflow-y:auto;background:var(--bg);border-radius:24px 24px 0 0;padding:16px 16px calc(22px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:10px;box-shadow:0 -10px 40px rgba(0,0,0,.5)}
+.sheet .stage{max-width:none;height:clamp(200px,40vh,340px)}
+.sheet-x{position:absolute;top:24px;right:24px;z-index:2}
+.sh-title{font-family:var(--display);font-weight:800;font-size:clamp(30px,9vw,42px);line-height:1;text-transform:uppercase;text-wrap:balance}
+.sh-how{font-size:17px;line-height:1.45;opacity:.88}
+.sh-tip{font-size:14px;color:var(--muted)}
+.sh-tip b{color:var(--accent);font-weight:600}
+
 @media (max-height:640px){
+  .stage{height:clamp(110px,24vh,190px)}
+  .moves .mini{display:none}
   .moves li{padding:7px 4px 8px}
   .moves b{font-size:28px}
   .moves span{font-size:13px}
@@ -256,6 +334,13 @@ h1,h2,h3,p{margin:0}
     </button>
   </header>
 
+  <nav class="tabs" role="tablist" aria-label="Bereiche">
+    <button type="button" role="tab" id="tabTrain" data-tab="train" aria-controls="pTrain" aria-selected="true">Training</button>
+    <button type="button" role="tab" id="tabStretch" data-tab="stretch" aria-controls="pStretch" aria-selected="false">Dehnen</button>
+    <button type="button" role="tab" id="tabSkills" data-tab="skills" aria-controls="pSkills" aria-selected="false">Skills</button>
+  </nav>
+
+  <div class="panel" id="pTrain" role="tabpanel" aria-labelledby="tabTrain">
   <section class="streak" id="streak" aria-label="Streak">
     <div class="streak-num">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.2 2.2c.5 3-1.2 4.7-2.6 6.3-1.2 1.4-2.1 2.6-1.6 4.4.3-1.3 1.2-2.1 2.2-2.5-.4 2.2 1.6 3 1.6 5 0 1.2-.8 2.2-2 2.5 3.3.4 5.5-1.8 5.4-4.6 1 .8 1.5 2 1.5 3.3C17.7 20 15.2 22 12 22c-3.9 0-7-2.6-7-6.6 0-3.6 2.4-5.8 4.3-7.8 1.6-1.7 3.2-3.3 3.9-5.4z"/></svg>
@@ -277,6 +362,7 @@ h1,h2,h3,p{margin:0}
     <div class="sec-head"><h2 class="sec-title" id="hToday">Heute</h2></div>
     <p class="why" id="whyText"></p>
     <div class="variants" id="variantList" role="radiogroup" aria-labelledby="hToday"></div>
+    <div class="howto" id="howto"></div>
   </section>
 
   <section class="sec" aria-labelledby="hLevel">
@@ -299,6 +385,27 @@ h1,h2,h3,p{margin:0}
     </div>
     <ul class="hist-list" id="histList"></ul>
   </section>
+  </div>
+
+  <div class="panel" id="pStretch" role="tabpanel" aria-labelledby="tabStretch" hidden>
+    <div class="rest">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.3 14.6A8.5 8.5 0 0 1 9.4 3.7a8.5 8.5 0 1 0 10.9 10.9z"/></svg>
+      <div><strong>Dehnen für Ruhetage</strong><span>Sanft und ohne Belastung. Zählt nicht als Trainingstag – dein Streak bleibt, wie er ist.</span></div>
+    </div>
+    <section class="sec" aria-labelledby="hProg">
+      <div class="sec-head"><h2 class="sec-title" id="hProg">Programm</h2><span class="sec-note" id="stretchWeek"></span></div>
+      <div class="progs" id="progList" role="radiogroup" aria-labelledby="hProg"></div>
+    </section>
+    <section class="sec" aria-labelledby="hEx">
+      <div class="sec-head"><h2 class="sec-title" id="hEx">Übungen</h2><span class="sec-note">Tippen zum Ansehen</span></div>
+      <ul class="ex-list" id="exList"></ul>
+    </section>
+  </div>
+
+  <div class="panel" id="pSkills" role="tabpanel" aria-labelledby="tabSkills" hidden>
+    <p class="why">Schritt für Schritt zum Skill. Hak ab, was du sicher kannst – der nächste Schritt wird markiert.</p>
+    <div class="skills" id="skillList"></div>
+  </div>
 
   <footer class="foot">
     <span>Deine Daten bleiben nur auf diesem Gerät.</span>
@@ -332,12 +439,10 @@ h1,h2,h3,p{margin:0}
 
   <div class="wk-body" id="vTimed">
     <p class="t-eyebrow" id="tEyebrow"></p>
+    <div class="stage" id="tStage"></div>
     <h2 class="t-name" id="tName"></h2>
     <p class="t-how" id="tHow"></p>
-    <div class="ring">
-      <svg viewBox="0 0 200 200" aria-hidden="true"><circle class="track" cx="100" cy="100" r="88"/><circle class="prog" id="tRing" cx="100" cy="100" r="88"/></svg>
-      <div class="ring-num" id="tNum" aria-live="off">30</div>
-    </div>
+    <div class="count"><span class="count-num" id="tNum" aria-live="off">30</span><div class="count-bar"><i id="tBar"></i></div></div>
     <p class="t-next" id="tNext"></p>
     <p class="t-tip" id="tTip" hidden>Tipp: Stell die automatische Bildschirmsperre aus – dein Browser kann den Bildschirm nicht wach halten.</p>
   </div>
@@ -383,16 +488,16 @@ h1,h2,h3,p{margin:0}
   <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
   <div class="done-inner">
     <p class="t-eyebrow" id="dMeta"></p>
-    <h2 class="done-title">Geschafft!</h2>
-    <div class="done-score">
+    <h2 class="done-title" id="dTitle">Geschafft!</h2>
+    <div class="done-score" id="dScore">
       <button type="button" class="adj" id="dMinus" aria-label="Eine Runde weniger">−</button>
       <span class="done-rounds" id="dRounds">0</span>
       <button type="button" class="adj" id="dPlus" aria-label="Eine Runde mehr">+</button>
     </div>
-    <p class="done-unit">Runden in 20 Minuten</p>
+    <p class="done-unit" id="dUnit">Runden in 20 Minuten</p>
     <p class="badge" id="dBadge" hidden>Neuer Rekord!</p>
     <p class="done-cmp" id="dCmp"></p>
-    <div class="done-stats">
+    <div class="done-stats" id="dStats">
       <div><span class="lbl">Ø pro Runde</span><b id="dAvg">–</b></div>
       <div><span class="lbl">Schnellste</span><b id="dFast">–</b></div>
       <div><span class="lbl">Streak</span><b id="dStreak">1</b></div>
@@ -404,6 +509,19 @@ h1,h2,h3,p{margin:0}
     <button type="button" class="btn-primary" id="btnDone">Fertig</button>
   </div>
 </section>
+
+<div class="sheet-bg" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="shTitle">
+  <div class="sheet">
+    <button type="button" class="icon-btn sheet-x" id="shClose" aria-label="Schließen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="stage" id="shStage"></div>
+    <p class="t-eyebrow" id="shArea"></p>
+    <h2 class="sh-title" id="shTitle"></h2>
+    <p class="sh-how" id="shHow"></p>
+    <p class="sh-tip" id="shTip"></p>
+  </div>
+</div>
 
 <script>
 (() => {
@@ -449,6 +567,83 @@ const STRETCH = [
   { name:'Gesäß in Rückenlage', area:'Hüfte & Gesäß', how:'Knöchel aufs andere Knie legen und das untere Bein sanft zur Brust ziehen.', dur:30, switchAt:15 },
 ];
 
+['armkreisen','handgelenke','hampelmann','hueftkreisen','halbhocke','schulterblatt'].forEach((k, i) => { WARMUP[i].anim = k; });
+
+// Dehn-Bibliothek: die 8 Dehnungen aus dem Training plus Extras für Ruhetage
+const STR = {};
+['brust','armquer','seit','kind','hueft','quad','vorbeuge','gesaess'].forEach((id, i) => {
+  const s = STRETCH[i]; s.id = id; s.anim = id; s.side = !!s.switchAt; STR[id] = s;
+});
+Object.assign(STR, {
+  katze:  { name:'Katze-Kuh', area:'Wirbelsäule', how:'Im Vierfüßlerstand abwechselnd den Rücken rund machen und sanft durchhängen lassen – im Rhythmus deines Atems.' },
+  hund:   { name:'Herabschauender Hund', area:'Beinrückseite & Schultern', how:'Hüfte hoch und nach hinten schieben, Fersen Richtung Boden, Kopf locker zwischen den Armen.' },
+  kobra:  { name:'Kobra', area:'Bauch & Brust', how:'Bauchlage, Hände unter den Schultern. Oberkörper sanft hochdrücken, die Hüfte bleibt am Boden.' },
+  hocke:  { name:'Tiefe Hocke', area:'Hüfte & Sprunggelenke', how:'Füße schulterbreit, tief absitzen, Fersen bleiben am Boden, Ellbogen schieben die Knie nach außen.' },
+  schmetterling: { name:'Schmetterling', area:'Innenseite Oberschenkel', how:'Fußsohlen zusammen, Füße festhalten und die Knie sanft Richtung Boden sinken lassen.' },
+  wade:   { name:'Wade an der Wand', area:'Waden', side:true, how:'Hände an die Wand, hinteres Bein gestreckt, Ferse in den Boden drücken und das Becken nach vorn schieben.' },
+  nacken: { name:'Nacken seitlich', area:'Nacken', side:true, how:'Hand über den Kopf legen und das Ohr sanft zur Schulter ziehen. Die andere Schulter sinkt nach unten.' },
+});
+['katze','hund','kobra','hocke','schmetterling','wade','nacken'].forEach(id => { STR[id].id = id; STR[id].anim = id; });
+
+const PROGRAMS = [
+  { id:'ganz', name:'Ganzkörper', items:[['katze',45],['kind',60],['hund',45],['kobra',40],['hueft',60],['hocke',45],['vorbeuge',50],['schmetterling',50],['gesaess',60],['brust',60],['armquer',50],['nacken',40]] },
+  { id:'oben', name:'Oberkörper', items:[['nacken',40],['armquer',50],['seit',50],['brust',60],['katze',45],['kind',60],['kobra',40]] },
+  { id:'unten', name:'Hüfte & Beine', items:[['hocke',45],['hueft',60],['quad',50],['wade',50],['hund',45],['vorbeuge',50],['schmetterling',50],['gesaess',60]] },
+];
+const progSec = p => p.items.reduce((s, it) => s + it[1], 0);
+
+// Animation + Kurzanleitung je AMRAP-Übung (Schlüssel = angezeigter Name)
+const MOVE_INFO = {
+  'Klimmzüge':                   ['pull', 'Aus dem gestreckten Hang hochziehen, bis das Kinn über der Stange ist. Kontrolliert ablassen.'],
+  'Negative Klimmzüge':          ['negpull', 'Hochspringen oder von einem Stuhl starten, dann 3–5 Sekunden langsam in den Hang ablassen.'],
+  'Liegestütze':                 ['pushup', 'Hände unter den Schultern, Körper wie ein Brett. Brust bis kurz über den Boden senken.'],
+  'Knie-Liegestütze':            ['kneepush', 'Wie Liegestütze, aber auf den Knien. Hüfte bleibt gestreckt, nicht abknicken.'],
+  'Kniebeugen':                  ['squat', 'Füße schulterbreit, Po nach hinten unten, Fersen am Boden. Oberschenkel bis mindestens waagerecht.'],
+  'Kniebeugen zum Stuhl':        ['boxsquat', 'Vor einem Stuhl stehen, kurz mit dem Po antippen und kraftvoll wieder aufstehen.'],
+  'Australian Rows unterm Tisch':['row', 'Unter einen stabilen Tisch legen, Tischkante greifen, Körper gestreckt. Brust zur Kante ziehen.'],
+  'Rows mit gebeugten Knien':    ['roweasy', 'Wie Australian Rows, aber Füße näher ran und Knie gebeugt – so ziehst du weniger Gewicht.'],
+  'Ausfallschritte':             ['lunge', 'Großer Schritt nach vorn, hinteres Knie Richtung Boden, vorderes Knie über dem Fuß. Beine abwechseln.'],
+  'Ausfallschritte rückwärts':   ['revlunge', 'Schritt nach hinten statt nach vorn – leichter für Gleichgewicht und Knie.'],
+  'Mountain Climber':            ['mc', 'Im Liegestütz die Knie abwechselnd zügig zur Brust ziehen. Hüfte bleibt unten.'],
+  'Langsame Mountain Climber':   ['mcslow', 'Wie Mountain Climber, aber im ruhigen Tempo – Knie für Knie.'],
+  'Sit-ups':                     ['situp', 'Rückenlage, Knie gebeugt. Oberkörper ganz aufrichten und kontrolliert wieder ablegen.'],
+  'Crunches':                    ['crunch', 'Rückenlage, nur die Schultern vom Boden heben. Der untere Rücken bleibt am Boden.'],
+  'Pike Push-ups':               ['pike', 'Hüfte hoch wie ein umgedrehtes V. Kopf zwischen den Händen Richtung Boden senken.'],
+  'Pike Push-ups, Hände erhöht': ['pikeeasy', 'Hände auf Sofa oder Stuhl, Hüfte hoch. Weniger Gewicht auf den Schultern als am Boden.'],
+  'Jump Squats':                 ['jumpsquat', 'Tiefe Kniebeuge, dann explosiv hochspringen und weich in die nächste Kniebeuge landen.'],
+  'Kniebeugen ohne Sprung':      ['squat', 'Normale Kniebeuge im zügigen Tempo, ohne Sprung.'],
+};
+
+const SKILLS = [
+  { id:'handstand', name:'Handstand', anim:'handstand', intro:'Schulterkraft, Körperspannung, dann Balance.',
+    note:'Vorher Handgelenke gut aufwärmen.',
+    steps:[ ['Pike Push-ups', '3× 8 saubere Wiederholungen für die Schultern', 'pike'],
+            ['Bauch zur Wand', '3× 30 Sek. halten, Körper ganz gestreckt', 'hswall'],
+            ['Aufschwingen an die Wand', '10 kontrollierte Kick-ups, Rücken zur Wand'],
+            ['Freie Balance-Versuche', '10× 3–5 Sek. – und seitlich abrollen üben'],
+            ['30 Sek. freier Handstand', 'Das große Ziel', 'handstand'] ] },
+  { id:'muscleup', name:'Muscle-up', anim:'muscleup', intro:'Vom Klimmzug über die Stange in den Stütz.',
+    steps:[ ['10 saubere Klimmzüge', 'am Stück, volle Bewegung', 'pull'],
+            ['Explosive Klimmzüge', '3× 5 – Brust bis zur Stange'],
+            ['15 Dips', 'am Barren oder zwischen zwei stabilen Stühlen'],
+            ['Negative Muscle-ups', '3× 3 – oben starten und langsam durch den Übergang ablassen'],
+            ['1 sauberer Muscle-up', 'Das große Ziel', 'muscleup'] ] },
+  { id:'flag', name:'Human Flag', anim:'flag', intro:'Seitlich waagerecht an einer Stange – pure Seitenkraft.',
+    note:'Nur an einer fest verankerten Stange üben.',
+    steps:[ ['Seitstütz', '3× 45 Sek. je Seite', 'sideplank'],
+            ['Vertikale Fahne', '3× 10 Sek. – Körper senkrecht an der Stange halten'],
+            ['Tuck Flag', '3× 5 Sek. mit angezogenen Knien'],
+            ['Straddle Flag', '3× 5 Sek. mit gegrätschten Beinen', 'flag'],
+            ['5 Sek. Human Flag', 'Das große Ziel', 'flag'] ] },
+  { id:'backflip', name:'Backflip', anim:'backflip', intro:'Absprung, Rotation, sichere Landung.',
+    note:'Nur mit Weichboden, Trampolin oder Trainer üben – ein missglückter Backflip kann Kopf und Nacken verletzen.',
+    steps:[ ['Tuck Jumps', '3× 10 – Knie explosiv zur Brust', 'tuckjump'],
+            ['Rückwärtsrolle', '5× sauber auf der Matte'],
+            ['Brücke', '3× 20 Sek. – Hüfte hoch, Arme gestreckt'],
+            ['Backflip mit Absicherung', 'Trampolin, Weichboden oder Hilfestellung'],
+            ['Backflip auf festem Boden', 'Das große Ziel', 'backflip'] ] },
+];
+
 const AMRAP_SEC = 1200;
 const MAX_REST = 2;               // erlaubte Ruhetage zwischen zwei Trainings
 const PHASE_NAME = { warm:'Aufwärmen', amrap:'AMRAP', stretch:'Dehnen' };
@@ -464,14 +659,20 @@ const V = id => VARIANTS.find(v => v.id === id);
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 
 /* ================= Speicher ================= */
-const DEFAULTS = { sound:true, level:'normal', pick:null };
+const DEFAULTS = { sound:true, level:'normal', pick:null, tab:'train', prog:'ganz' };
 const state = load();
 function load(){
+  const s = { sessions:[], stretches:[], skills:{}, settings:Object.assign({}, DEFAULTS) };
   try {
     const d = JSON.parse(localStorage.getItem(KEY));
-    if (d && Array.isArray(d.sessions)) return { sessions:d.sessions, settings:Object.assign({}, DEFAULTS, d.settings) };
+    if (d && Array.isArray(d.sessions)) {
+      s.sessions = d.sessions;
+      if (Array.isArray(d.stretches)) s.stretches = d.stretches;
+      if (d.skills && typeof d.skills === 'object') s.skills = d.skills;
+      Object.assign(s.settings, d.settings);
+    }
   } catch (e) {}
-  return { sessions:[], settings:Object.assign({}, DEFAULTS) };
+  return s;
 }
 function persist(){
   if (TEST) return;
@@ -593,6 +794,266 @@ async function lockScreen(){
 }
 function unlockScreen(){ try { wakeLock && wakeLock.release(); } catch (e) {} wakeLock = null; }
 
+/* ================= Figuren-Animationen =================
+   Seitenansicht, Blick nach rechts. Winkel in Grad: 0 = nach unten, 90 = nach vorn (rechts),
+   180 = nach oben, 270 = nach hinten. Pose: x,y = Hüfte · t = Rumpf · n = Kopfneigung ·
+   a/b = nahe/ferne Arme [Oberarm, Unterarm] · l/m = nahes/fernes Bein [Oberschenkel, Unterschenkel, Fuß] ·
+   c = Rückenrundung · s = Schulter vor/zurück · r = Drehung des ganzen Körpers · k = Verkürzung einzelner
+   Glieder (Perspektive) · fv = Frontansicht. Boden liegt bei y = 46. */
+const ANIMS = {};
+const LEN = { T:32, S:28, H:9, au:17, af:16, bu:17, bf:16, lt:22, ls:21, rt:22, rs:21, ft:6 };
+const D2R = Math.PI / 180;
+const dv = (a, l) => [Math.sin(a * D2R) * l, Math.cos(a * D2R) * l];
+const ad = (p, v, m = 1) => [p[0] + v[0] * m, p[1] + v[1] * m];
+
+function rig(p){
+  const r = p.r || 0, k = p.k || {}, L = n => LEN[n] * (k[n] == null ? 1 : k[n]);
+  const t = (p.t == null ? 180 : p.t) + r;
+  const hip = [p.x || 0, p.y || 0];
+  const neck = ad(hip, dv(t, LEN.T));
+  const head = ad(neck, dv(t + (p.n || 0), LEN.H));
+  const sh = ad(hip, dv(t, LEN.S));
+  const side = dv(t + 90, 1);
+  let sA, sB, hA, hB;
+  if (p.fv) { sA = ad(sh, side, 8); sB = ad(sh, side, -8); hA = ad(hip, side, 5); hB = ad(hip, side, -5); }
+  else { sA = sB = ad(sh, dv(t - 90, p.s || 0)); hA = hB = hip; }
+  const arm = (s, A, u, f) => { A = A || [0, 0]; const e = ad(s, dv(A[0] + r, L(u))); return [s, e, ad(e, dv(A[1] + r, L(f)))]; };
+  const leg = (h, G, u, s, fd) => {
+    G = G || [0, 0];
+    const kn = ad(h, dv(G[0] + r, L(u))), an = ad(kn, dv(G[1] + r, L(s)));
+    return [h, kn, an, ad(an, dv((G[2] == null ? fd : G[2]) + r, LEN.ft))];
+  };
+  const ctrl = ad([(hip[0] + neck[0]) / 2, (hip[1] + neck[1]) / 2], side, (p.c || 0) * 2);
+  return { hip, neck, head, ctrl, sA, sB, hA, hB,
+    A: arm(sA, p.a, 'au', 'af'), B: arm(sB, p.b, 'bu', 'bf'),
+    L: leg(hA, p.l, 'lt', 'ls', p.fv ? 270 : 90), M: leg(hB, p.m, 'rt', 'rs', 90) };
+}
+
+function focusPt(R, f){
+  const segs = { T:[R.hip, R.neck], au:[R.A[0], R.A[1]], af:[R.A[1], R.A[2]], bu:[R.B[0], R.B[1]], bf:[R.B[1], R.B[2]],
+                 lt:[R.L[0], R.L[1]], ls:[R.L[1], R.L[2]], rt:[R.M[0], R.M[1]], rs:[R.M[1], R.M[2]] };
+  const [a, b] = segs[f[0]], u = f[1], v = 1 - u;
+  const p = f[0] === 'T'
+    ? [v * v * a[0] + 2 * u * v * R.ctrl[0] + u * u * b[0], v * v * a[1] + 2 * u * v * R.ctrl[1] + u * u * b[1]]
+    : [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u];
+  const dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1;
+  return [p[0] + dy / l * f[2], p[1] - dx / l * f[2]];
+}
+
+const PDEF = { x:0, y:0, t:180, n:0, s:0, c:0, r:0 };
+function lerpPose(A, B, u){
+  const o = { fv: A.fv };
+  for (const key in PDEF) if (key in A || key in B) {
+    const a = key in A ? A[key] : PDEF[key], b = key in B ? B[key] : PDEF[key];
+    o[key] = a + (b - a) * u;
+  }
+  for (const key of ['a', 'b', 'l', 'm']) if (A[key] || B[key]) {
+    const a = A[key] || [0, 0], b = B[key] || [0, 0];
+    o[key] = [];
+    for (let i = 0; i < Math.max(a.length, b.length); i++) {
+      const x = a[i] == null ? b[i] : a[i], y = b[i] == null ? a[i] : b[i];
+      o[key].push(x + (y - x) * u);
+    }
+  }
+  if (A.k || B.k) {
+    const ka = A.k || {}, kb = B.k || {};
+    o.k = {};
+    for (const key of new Set([...Object.keys(ka), ...Object.keys(kb)])) {
+      const a = ka[key] == null ? 1 : ka[key], b = kb[key] == null ? 1 : kb[key];
+      o.k[key] = a + (b - a) * u;
+    }
+  }
+  return o;
+}
+
+// Ablauf: [Pose, Halten ms, Übergang ms]; w = letzte Pose springt nahtlos auf die erste (Drehungen)
+function timeline(an){
+  const n = an.k.length, seq = [];
+  an.k.forEach((fr, i) => {
+    if (fr[1]) seq.push([i, i, fr[1]]);
+    const j = (i + 1) % n;
+    if (n > 1 && !(an.w && j === 0)) seq.push([i, j, fr[2] || an.tr || 700]);
+  });
+  return seq;
+}
+function poseAt(fig, ms){
+  const an = fig.an;
+  if (!fig.total) return an.k[0][0];
+  let t = ms % fig.total;
+  for (const [i, j, d] of fig.seq) {
+    if (t < d) {
+      if (i === j) return an.k[i][0];
+      let u = t / d;
+      if (!an.lin) u = .5 - Math.cos(u * Math.PI) / 2;
+      return lerpPose(an.k[i][0], an.k[j][0], u);
+    }
+    t -= d;
+  }
+  return an.k[0][0];
+}
+
+const f1 = n => (Math.round(n * 10) / 10).toString();
+const ptsStr = arr => arr.map(q => f1(q[0]) + ',' + f1(q[1])).join(' ');
+function drawFig(fig, p){
+  const R = rig(p), e = fig.el;
+  e.A.setAttribute('points', ptsStr(R.A)); e.B.setAttribute('points', ptsStr(R.B));
+  e.L.setAttribute('points', ptsStr(R.L)); e.M.setAttribute('points', ptsStr(R.M));
+  e.T.setAttribute('d', `M${f1(R.hip[0])},${f1(R.hip[1])} Q${f1(R.ctrl[0])},${f1(R.ctrl[1])} ${f1(R.neck[0])},${f1(R.neck[1])}`);
+  e.SH.setAttribute('points', p.fv ? ptsStr([R.sA, R.sB]) : '');
+  e.HP.setAttribute('points', p.fv ? ptsStr([R.hA, R.hB]) : '');
+  e.H.setAttribute('cx', f1(R.head[0])); e.H.setAttribute('cy', f1(R.head[1]));
+  if (fig.focus) { const q = focusPt(R, fig.an.f); fig.focus.setAttribute('cx', f1(q[0])); fig.focus.setAttribute('cy', f1(q[1])); }
+}
+
+const FIGS = new Set();
+let figRaf = 0;
+function figLoop(now){
+  for (const f of FIGS) {
+    if (!f.svg.isConnected) { FIGS.delete(f); continue; }
+    if (f.svg.getClientRects().length) drawFig(f, poseAt(f, now - f.t0));
+  }
+  figRaf = FIGS.size ? requestAnimationFrame(figLoop) : 0;
+}
+
+// Hängt eine Figur in host. still = nur die Hauptpose zeichnen (Vorschaubilder)
+function figure(host, key, still){
+  const an = ANIMS[key];
+  if (!host || !an) return null;
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', an.v || '-60 -68 120 118');
+  svg.setAttribute('class', 'fig' + (an.k[0][0].fv ? ' fv' : ''));
+  svg.setAttribute('aria-hidden', 'true');
+  let h = an.g === false ? '' : '<line class="fig-gnd" x1="-200" x2="200" y1="46" y2="46"/>';
+  for (const pr of an.p || []) h += pr[0] === 'r'
+    ? `<rect class="fig-prop" x="${pr[1]}" y="${pr[2]}" width="${pr[3]}" height="${pr[4]}" rx="1.5"/>`
+    : `<line class="fig-prop" x1="${pr[1]}" y1="${pr[2]}" x2="${pr[3]}" y2="${pr[4]}"/>`;
+  if (an.f) h += `<circle class="fig-focus" r="${an.f[3] || 7}"/>`;
+  h += '<g class="fig-far"><polyline data-p="B"/><polyline data-p="M"/></g>'
+     + '<g class="fig-near"><path data-p="T"/><polyline data-p="SH"/><polyline data-p="HP"/><circle data-p="H" r="7"/><polyline data-p="L"/><polyline data-p="A"/></g>';
+  svg.innerHTML = h;
+  host.appendChild(svg);
+  const el = {};
+  svg.querySelectorAll('[data-p]').forEach(n => { el[n.dataset.p] = n; });
+  const fig = { svg, an, el, focus: svg.querySelector('.fig-focus'), seq: timeline(an), t0: performance.now() };
+  fig.total = fig.seq.reduce((s, x) => s + x[2], 0);
+  if (still) {
+    // Vorschaubild: Ausschnitt eng um die Figur legen
+    const pose = an.k[an.m != null ? an.m : Math.min(1, an.k.length - 1)][0], R = rig(pose);
+    let x0 = R.head[0] - 7, x1 = R.head[0] + 7, y0 = R.head[1] - 7, y1 = R.head[1] + 7;
+    for (const q of [...R.A, ...R.B, ...R.L, ...R.M, R.hip, R.neck]) {
+      x0 = Math.min(x0, q[0]); x1 = Math.max(x1, q[0]); y0 = Math.min(y0, q[1]); y1 = Math.max(y1, q[1]);
+    }
+    svg.setAttribute('viewBox', `${f1(x0 - 7)} ${f1(y0 - 7)} ${f1(x1 - x0 + 14)} ${f1(y1 - y0 + 14)}`);
+    drawFig(fig, pose);
+  } else if (RM.matches) {
+    drawFig(fig, an.k[an.m != null ? an.m : Math.min(1, an.k.length - 1)][0]);
+  } else {
+    drawFig(fig, an.k[0][0]);
+    FIGS.add(fig);
+    if (!figRaf) figRaf = requestAnimationFrame(figLoop);
+  }
+  return fig;
+}
+// Aufwärmen
+Object.assign(ANIMS, {
+  armkreisen:   { lin:1, w:1, tr:450, f:['au', 0, 0, 7], k:[[{a:[0,0],b:[0,0]},0],[{a:[90,90],b:[90,90]},0],[{a:[180,180],b:[180,180]},0],[{a:[270,270],b:[270,270]},0],[{a:[360,360],b:[360,360]},0]] },
+  handgelenke:  { tr:450, f:['af', 1, 0, 5], k:[[{a:[25,75],b:[25,75]},0],[{a:[25,115],b:[25,115]},0]] },
+  hampelmann:   { tr:260, k:[[{fv:1,a:[-8,-8],b:[8,8],l:[-2,-2,270],m:[2,2,90]},80],[{fv:1,y:1,a:[-150,-150],b:[150,150],l:[-14,-14,270],m:[14,14,90]},80]] },
+  hueftkreisen: { tr:750, f:['T', 0, 0, 8], k:[[{fv:1,x:-5,t:172,a:[-40,40],b:[40,-40],l:[7,7,270],m:[7,7,90]},0],[{fv:1,x:5,t:188,a:[-40,40],b:[40,-40],l:[-7,-7,270],m:[-7,-7,90]},0]] },
+  halbhocke:    { tr:900, k:[[{a:[10,10],b:[10,10]},200],[{x:-8,y:10,t:160,a:[95,95],b:[95,95],l:[50,-25],m:[50,-25]},200]] },
+  schulterblatt:{ tr:700, f:['T', .9, 5, 7], k:[[{a:[90,90],b:[90,90],s:3},300],[{a:[90,90],b:[90,90],s:-3},600]] },
+});
+
+// Dehnen – der gelbe Punkt zeigt, wo die Dehnung zu spüren ist
+Object.assign(ANIMS, {
+  brust:   { p:[['r',-11.5,-68,3,114]], tr:900, f:['T', .8, -4, 8], k:[[{a:[270,180],b:[0,0],k:{au:.35},l:[8,8],m:[-8,-8]},700],[{x:3,t:178,a:[270,180],b:[0,0],k:{au:.59},l:[4,4],m:[-12,-12]},2600]] },
+  armquer: { tr:900, f:['au', .15, 0, 7], k:[[{fv:1,l:[0,0,270],m:[0,0,90]},600],[{fv:1,a:[90,90],b:[15,181],l:[0,0,270],m:[0,0,90]},2600]] },
+  seit:    { tr:900, f:['T', .62, 7, 8], m:2, k:[[{fv:1,l:[0,0,270],m:[0,0,90]},500],[{fv:1,a:[-190,30],b:[190,270],l:[0,0,270],m:[0,0,90]},300],[{fv:1,x:-3,t:163,a:[-207,13],b:[173,253],l:[4,4,270],m:[4,4,90]},2400]] },
+  kind:    { tr:1100, f:['T', .55, 4, 9], k:[[{x:-27,y:30,a:[10,10],b:[10,10],l:[52,270,270],m:[52,270,270]},700],[{x:-27,y:30,t:78,c:3,a:[82,75],b:[83,76],l:[52,270,270],m:[52,270,270]},3000]] },
+  hueft:   { tr:1000, f:['lt', .15, 4, 7], k:[[{x:-4,y:21,a:[-20,40],b:[-15,40],l:[0,270,270],m:[90,0,90]},700],[{x:2,y:22,t:182,a:[-20,40],b:[-15,40],l:[-16,270,270],m:[90,-16,90]},2800]] },
+  quad:    { tr:700, f:['lt', .5, 3, 7], m:2, k:[[{},500],[{a:[-15,-11],b:[70,80],l:[0,-160,-100]},300],[{a:[-18,-14],b:[70,80],l:[-10,-165,-110]},2600]] },
+  vorbeuge:{ tr:1200, f:['lt', .6, -3, 7], k:[[{x:-22,y:42,t:178,a:[-20,-20],b:[-20,-20],l:[90,90,180],m:[90,90,180]},700],[{x:-22,y:42,t:135,n:-15,c:3,a:[65,50],b:[66,51],l:[90,90,180],m:[90,90,180]},3000]] },
+  gesaess: { tr:1100, f:['T', 0, 0, 8], k:[[{x:8,y:39,t:270,a:[148,96],b:[150,98],m:[180,90,90],l:[140,208,120],k:{lt:.7,ls:.6}},800],[{x:8,y:39,t:270,a:[173,83],b:[175,85],m:[205,115,90],l:[160,234,120],k:{lt:.7,ls:.6}},2800]] },
+  katze:   { tr:1400, f:['T', .5, 3, 9], k:[[{x:-14,y:21,t:113,c:-4,n:30,l:[0,270,270],m:[0,270,270]},900],[{x:-14,y:21,t:113,c:5,n:-40,l:[0,270,270],m:[0,270,270]},900]] },
+  hund:    { tr:1300, f:['lt', .6, -3, 8], k:[[{x:5,y:21,t:113,l:[0,270,270],m:[0,270,270]},600],[{x:-16,y:4,t:50,a:[50,50],b:[50,50],l:[-25,335,450],m:[-25,335,450]},3000]] },
+  kobra:   { tr:1200, f:['T', .35, -4, 8], k:[[{x:-10,y:39,t:90,a:[-134,-6],b:[-134,-6],l:[270,270,270],m:[270,270,270]},700],[{x:-10,y:39,t:160,n:-15,c:-4,a:[-13,31],b:[-13,31],l:[270,270,270],m:[270,270,270]},2800]] },
+  hocke:   { tr:1200, f:['T', 0, 0, 8], k:[[{},500],[{x:-9,y:20,t:165,a:[40,150],b:[42,152],l:[75,-35],m:[75,-35]},3000]] },
+  schmetterling: { tr:800, f:['T', 0, 0, 9], m:3, k:[[{fv:1,y:40,a:[-25,25],b:[25,-25],l:[-110,67,90],m:[110,-67,270]},150],[{fv:1,y:40,a:[-25,25],b:[25,-25],l:[-100,76,90],m:[100,-76,270]},150],[{fv:1,y:40,a:[-25,25],b:[25,-25],l:[-110,67,90],m:[110,-67,270]},150],[{fv:1,y:40,a:[-25,25],b:[25,-25],l:[-98,78,90],m:[98,-78,270]},2200]] },
+  wade:    { p:[['r',34,-68,4,114]], tr:1100, f:['ls', .35, -3, 7], k:[[{x:0,y:6,t:150,a:[42,152],b:[44,152],l:[-30,-30,90],m:[40,-5,90]},700],[{x:4,y:7,t:145,a:[46,177],b:[48,177],l:[-35,-35,90],m:[41,-17,90]},2800]] },
+  nacken:  { tr:900, f:['T', 1, 5, 6], k:[[{fv:1,l:[0,0,270],m:[0,0,90]},600],[{fv:1,n:-25,a:[-8,-8],b:[160,250],l:[0,0,270],m:[0,0,90]},2600]] },
+});
+
+// AMRAP-Übungen
+(() => {
+  const bar = [['l', -28, -64, 28, -64]], vbBar = '-60 -82 120 132';
+  const hang = { y:-3, a:[180,180], b:[180,180], l:[10,-10], m:[6,-14] };
+  const top  = { x:-2.6, y:-28, t:185, a:[80,227], b:[80,227], l:[18,-5], m:[14,-9] };
+  const plank = { x:-1.7, y:22.5, t:117, l:[-63,-63,10], m:[-63,-63,10] };
+  const pushLow = { x:2.7, y:36.5, t:97, a:[-99,37], b:[-99,37], l:[-83,-83,10], m:[-83,-83,10] };
+  const stand = { a:[10,10], b:[10,10] };
+  const table = [['r', 0, -6, 60, 4], ['l', 57, -2, 57, 46]];
+  const chair = [['r', -30, 19, 20, 3], ['l', -28, 22, -28, 46], ['l', -12, 22, -12, 46], ['l', -29, 19, -29, -6]];
+  const lie = { y:39, t:270, a:[90,90], b:[90,90], l:[150,10], m:[150,10] };
+  const hips = { a:[-20,40], b:[-20,40] };
+  Object.assign(ANIMS, {
+    pull:      { v:vbBar, p:bar, k:[[hang,300,800],[top,350,900]] },
+    negpull:   { v:vbBar, p:bar, m:0, k:[[top,500,2800],[hang,300,450]] },
+    pushup:    { m:0, k:[[plank,250,850],[pushLow,150,750]] },
+    kneepush:  { m:0, k:[[{x:1.5,y:28.5,t:131,l:[-49,250,250],m:[-49,250,250]},250,850],[{x:6.6,y:38.6,t:101.5,a:[-108,17],b:[-108,17],l:[-78.5,250,250],m:[-78.5,250,250]},150,750]] },
+    squat:     { k:[[stand,250,900],[{x:-11,y:21,t:150,a:[95,95],b:[95,95],l:[80,-30],m:[80,-30]},250,800]] },
+    boxsquat:  { p:chair, k:[[stand,250,1000],[{x:-12,y:16.5,t:155,a:[95,95],b:[95,95],l:[70,-25],m:[70,-25]},350,900]] },
+    jumpsquat: { v:'-60 -80 120 130', k:[[{x:-11,y:21,t:150,a:[-40,-40],b:[-40,-40],l:[80,-30],m:[80,-30]},150,380],[{y:-12,t:178,a:[175,175],b:[175,175],l:[0,0,40],m:[0,0,40]},0,300],[{a:[20,20],b:[20,20]},100,450]] },
+    row:       { p:table, k:[[{x:.9,y:28.7,t:108,n:-20,a:[223,223],b:[223,223],l:[-72,-72,170],m:[-72,-72,170]},250,800],[{x:-2.9,y:20.3,t:120,n:-35,a:[290,180],b:[290,180],l:[-60,-60,170],m:[-60,-60,170]},300,800]] },
+    roweasy:   { p:table, k:[[{x:8,y:30,t:125,n:-30,a:[235,235],b:[235,235],l:[246,0,90],m:[246,0,90]},250,800],[{x:7,y:30.4,t:150,n:-75,a:[290,180],b:[290,180],l:[244,0,90],m:[244,0,90]},300,800]] },
+    lunge:     { k:[[{x:-20,...hips},300,700],[{x:11.7,y:22,...hips,l:[90,0,90],m:[-20,-105,20]},300,700]] },
+    revlunge:  { k:[[{x:23.7,...hips},300,700],[{x:1.7,y:22,...hips,l:[90,0,90],m:[-20,-105,20]},300,700]] },
+    mc:        { m:0, k:[[{...plank, l:[40,-90,0]},0,280],[{...plank, m:[40,-90,0]},0,280]] },
+    mcslow:    { m:0, tr:750, k:[[{...plank, l:[40,-90,0]},150],[{...plank, m:[40,-90,0]},150]] },
+    situp:     { k:[[lie,300,800],[{...lie, t:200, a:[100,100], b:[100,100]},250,700]] },
+    crunch:    { k:[[lie,300,700],[{...lie, t:235, a:[95,95], b:[95,95]},250,600]] },
+    pike:      { m:0, k:[[{x:-14,y:6,t:55,a:[51,51],b:[51,51],l:[-35.5,-35.5,30],m:[-35.5,-35.5,30]},250,900],[{x:-11,y:9,t:45,n:-10,a:[88,33],b:[88,33],l:[-41,-41,30],m:[-41,-41,30]},200,800]] },
+    pikeeasy:  { m:0, p:[['r',33,28,18,18]], k:[[{x:-16,y:7,t:70,a:[70,70],b:[70,70],l:[-38,-38,30],m:[-38,-38,30]},250,900],[{x:-13,y:10,t:58,n:-10,a:[104,62],b:[104,62],l:[-44,-44,30],m:[-44,-44,30]},200,800]] },
+  });
+})();
+
+// Skills
+(() => {
+  const hsA = { x:-2, y:-18, t:2, a:[2,2], b:[2,2], l:[-182,-182,-180], m:[-182,-182,-180] };
+  const hsB = { x:2, y:-18, t:-2, a:[-2,-2], b:[-2,-2], l:[-178,-178,-180], m:[-178,-178,-180] };
+  const crouch = { x:-8, y:10, t:160, a:[-50,-50], b:[-50,-50], l:[50,-25], m:[50,-25] };
+  const tuck = { a:[110,10], b:[110,10], l:[130,0,60], m:[130,0,60] };
+  const flag = { fv:1, x:10, y:-10, t:270, a:[-52,-52], b:[232,232] };
+  const side = { fv:1, x:-2.8, y:18, t:120, b:[0,0], l:[300,300,0], m:[300,300,0] };
+  Object.assign(ANIMS, {
+    handstand: { v:'-60 -72 120 122', f:['T', .9, 0, 8], m:1, k:[[{a:[180,180],b:[180,180]},500,900],[hsA,200,900],[hsB,200,900],[hsA,200,900],[hsB,600,1000]] },
+    hswall:    { v:'-60 -72 120 122', p:[['r',-10,-72,4,118]], f:['T', .9, 0, 8], k:[[{y:-18,t:0,a:[0,0],b:[0,0],l:[-176,-176,-180],m:[-176,-176,-180]},1400,900],[{x:-.6,y:-18,t:.5,a:[.5,.5],b:[.5,.5],l:[-177,-177,-180],m:[-177,-177,-180]},1400,900]] },
+    muscleup:  { v:'-60 -90 120 170', g:false, p:[['l',-30,-30,30,-30]], m:3, k:[
+      [{y:31,a:[180,180],b:[180,180],l:[8,-6],m:[4,-10]},400,500],
+      [{x:-.8,y:-1,t:195,a:[35,186],b:[35,186],l:[30,0],m:[25,-5]},0,280],
+      [{x:-8,y:-11.8,t:150,a:[-113.7,37],b:[-113.7,37],l:[-10,0],m:[-14,-4]},0,300],
+      [{x:2.4,y:-35,t:175,a:[0,0],b:[0,0],l:[6,0],m:[3,-3]},700,1100]] },
+    flag:      { p:[['r',-46,-68,4,114]], f:['T', .8, -6, 9], m:1, k:[[{...flag,l:[70,70,90],m:[110,110,90]},900,900],[{...flag,l:[90,90,90],m:[90,90,90]},1800,900]] },
+    sideplank: { f:['T', .3, -5, 8], k:[[{...side,a:[100,100]},700,900],[{...side,a:[180,180]},1600,900]] },
+    tuckjump:  { v:'-60 -80 120 130', m:2, k:[[{a:[0,0],b:[0,0]},300,350],[crouch,60,200],[{y:-24,...tuck},40,260],[{...crouch,a:[60,60],b:[60,60]},120,350]] },
+    backflip:  { v:'-60 -80 120 130', w:1, m:3, k:[
+      [{a:[0,0],b:[0,0]},300,380],
+      [crouch,80,220],
+      [{x:-2,y:-16,t:186,a:[190,190],b:[190,190],l:[-4,-4,20],m:[-4,-4,20]},0,230],
+      [{x:-4,y:-36,r:110,...tuck},0,220],
+      [{x:-5,y:-34,r:220,...tuck},0,220],
+      [{x:-5,y:-14,r:320,a:[160,160],b:[160,160],l:[20,-15,60],m:[20,-15,60]},0,220],
+      [{...crouch,r:360,a:[100,100],b:[100,100]},150,400],
+      [{r:360,a:[0,0],b:[0,0]},0]] },
+  });
+})();
+
+function setStage(host, key){
+  if (!host || host.dataset.anim === (key || '')) return;
+  host.innerHTML = '';
+  host.dataset.anim = key || '';
+  if (key) figure(host, key);
+}
+
 /* ================= Home ================= */
 let histVariant = null, chartSel = -1;
 
@@ -642,10 +1103,103 @@ function renderHome(){
   sb.querySelector('.snd-on').style.display = snd ? '' : 'none';
   sb.querySelector('.snd-off').style.display = snd ? 'none' : '';
 
-  $('#startMeta').textContent = `${V(sel).name} · ${LVL[level]} · ca. 28 Min`;
-
   if (!histVariant) histVariant = sel;
   renderHistory();
+  renderHowto(V(sel), level);
+  renderStretchTab();
+  renderSkills();
+  applyTab();
+}
+
+const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>';
+const ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const ICON_CHEV = '<svg class="skill-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+const curProg = () => PROGRAMS.find(p => p.id === state.settings.prog) || PROGRAMS[0];
+
+function applyTab(){
+  const tab = state.settings.tab;
+  document.querySelectorAll('.tabs [role="tab"]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
+  $('#pTrain').hidden = tab !== 'train';
+  $('#pStretch').hidden = tab !== 'stretch';
+  $('#pSkills').hidden = tab !== 'skills';
+  $('#startBar').hidden = tab === 'skills';
+  if (tab === 'stretch') {
+    const p = curProg();
+    $('#startMeta').textContent = `Dehnen · ${p.name} · ca. ${Math.round(progSec(p) / 60)} Min`;
+  } else {
+    $('#startMeta').textContent = `${V(selectedId(dayNum())).name} · ${LVL[state.settings.level]} · ca. 28 Min`;
+  }
+}
+
+function renderHowto(v, level){
+  $('#howto').innerHTML = '<span class="lbl">So geht’s – zum Ansehen antippen</span>' + movesFor(v, level).map((m, i) =>
+    `<button type="button" class="chip-btn" id="how-${i}" data-move="${m.name}">${ICON_PLAY}${m.name}</button>`).join('');
+}
+
+function renderStretchTab(){
+  const cur = curProg();
+  const focusId = document.activeElement && document.activeElement.classList.contains('prog') ? document.activeElement.id : null;
+  $('#progList').innerHTML = PROGRAMS.map(p =>
+    `<button type="button" class="prog" role="radio" id="prog-${p.id}" data-id="${p.id}" aria-checked="${p.id === cur.id}"><b>${Math.round(progSec(p) / 60)}<small>Min</small></b><span>${p.name}</span></button>`).join('');
+  if (focusId) { const f = document.getElementById(focusId); f && f.focus(); }
+  const list = $('#exList');
+  list.innerHTML = cur.items.map(([id, sec], i) => {
+    const s = STR[id];
+    return `<li><button type="button" class="ex" id="ex-${i}" data-str="${id}"><span class="thumb" data-thumb="${s.anim}"></span>
+      <span class="ex-txt"><strong>${s.name}</strong><span>${s.area}${s.side ? ' · je Seite' : ''}</span></span><span class="ex-dur">${sec} s</span></button></li>`;
+  }).join('');
+  list.querySelectorAll('[data-thumb]').forEach(el => figure(el, el.dataset.thumb, true));
+  const today = dayNum(), week = state.stretches.filter(s => today - s.day < 7).length;
+  $('#stretchWeek').textContent = week ? `letzte 7 Tage: ${week}× gedehnt` : '';
+}
+
+let openSkill = null;
+function renderSkills(){
+  $('#skillList').innerHTML = SKILLS.map(sk => {
+    const n = sk.steps.length, done = Math.min(n, state.skills[sk.id] || 0), open = openSkill === sk.id;
+    const status = done >= n ? 'Geschafft – stark!' : `Schritt ${done + 1} von ${n}: ${sk.steps[done][0]}`;
+    const steps = sk.steps.map((st, i) => `<li class="step${i < done ? ' done' : ''}${i === done ? ' now' : ''}">
+        <button type="button" class="step-check" id="st-${sk.id}-${i}" data-skill="${sk.id}" data-step="${i}" aria-pressed="${i < done}" aria-label="${st[0]} als geschafft markieren">${ICON_CHECK}</button>
+        <span class="step-txt">${i === done ? '<em>Dein nächster Schritt</em>' : ''}<strong>${st[0]}</strong><span>${st[1]}</span></span>
+        ${st[2] ? `<button type="button" class="step-view" data-view="${st[2]}" data-title="${st[0]}" data-text="${st[1]}">Ansehen</button>` : ''}
+      </li>`).join('');
+    return `<div class="skill" data-open="${open}">
+      <button type="button" class="skill-head" id="sk-${sk.id}" data-skill="${sk.id}" aria-expanded="${open}">
+        <span class="thumb" data-thumb="${sk.anim}"></span>
+        <span class="skill-txt"><strong>${sk.name}</strong><span>${status}</span><span class="skill-bar"><i style="width:${(100 * done / n).toFixed(0)}%"></i></span></span>
+        ${ICON_CHEV}
+      </button>
+      ${open ? `<div class="skill-body"><p class="sec-note">${sk.intro}</p>${sk.note ? `<p class="skill-note">${sk.note}</p>` : ''}<ol class="steps">${steps}</ol></div>` : ''}
+    </div>`;
+  }).join('');
+  $('#skillList').querySelectorAll('[data-thumb]').forEach(el => figure(el, el.dataset.thumb, true));
+}
+
+let sheetReturn = null;
+function openSheet(o){
+  sheetReturn = document.activeElement;
+  $('#shStage').dataset.anim = '-';
+  setStage($('#shStage'), o.anim);
+  $('#shArea').textContent = o.area || '';
+  $('#shTitle').textContent = o.name;
+  $('#shHow').textContent = o.how || '';
+  $('#shTip').innerHTML = o.tip || '';
+  $('#sheet').hidden = false;
+  $('#shClose').focus();
+}
+function closeSheet(){
+  $('#sheet').hidden = true;
+  setStage($('#shStage'), '');
+  if (sheetReturn && sheetReturn.isConnected) sheetReturn.focus();
+}
+const STRETCH_TIP = 'Der <b>gelbe Punkt</b> zeigt, wo du die Dehnung spüren solltest. Ruhig weiteratmen, nicht wippen.';
+function openStretchSheet(id){
+  const s = STR[id];
+  openSheet({ anim:s.anim, name:s.name, area:s.area + (s.side ? ' · je Seite' : ''), how:s.how, tip:STRETCH_TIP });
+}
+function openMoveSheet(name){
+  const info = MOVE_INFO[name];
+  if (info) openSheet({ anim:info[0], name, area:'So geht’s', how:info[1] });
 }
 
 function renderHistory(){
@@ -720,30 +1274,47 @@ function renderList(){
 /* ================= Ablauf ================= */
 let run = null, loop = null;
 
+function stretchSteps(items, steps){
+  items.forEach(([id, dur], i) => {
+    const s = STR[id], nx = items[i + 1];
+    steps.push({ kind:'move', phase:'stretch', dur, anim:s.anim, pos:`${i + 1} / ${items.length}`,
+      eyebrow:`Dehnen ${i + 1} von ${items.length} · ${s.area}`, name:s.name, how:s.how,
+      switchAt: s.side ? dur / 2 : 0, switchText:'Seite wechseln',
+      next: nx ? `Danach: <b>${STR[nx[0]].name}</b>` : 'Letzte Dehnung – gleich geschafft!' });
+  });
+  return steps;
+}
+function buildStretchSteps(p){
+  const first = STR[p.items[0][0]];
+  return stretchSteps(p.items, [{ kind:'prep', phase:'stretch', dur:5, anim:first.anim, eyebrow:'Gleich geht’s los', name:p.name,
+    how:`${p.items.length} Dehnübungen, ca. ${Math.round(progSec(p) / 60)} Minuten. Ganz entspannt.`, next:`Als Erstes: <b>${first.name}</b>` }]);
+}
 function buildSteps(v, level){
-  const moves = movesFor(v, level), steps = [];
-  steps.push({ kind:'prep', phase:'warm', dur:5, eyebrow:'Gleich geht’s los', name:'Aufwärmen', how:'3 Minuten, 6 Übungen à 30 Sekunden.', next:`Als Erstes: <b>${WARMUP[0].name}</b>` });
-  WARMUP.forEach((w, i) => steps.push({ kind:'move', phase:'warm', dur:w.dur, pos:`${i + 1} / ${WARMUP.length}`,
+  const moves = movesFor(v, level), steps = [], firstMove = MOVE_INFO[moves[0].name];
+  steps.push({ kind:'prep', phase:'warm', dur:5, anim:WARMUP[0].anim, eyebrow:'Gleich geht’s los', name:'Aufwärmen', how:'3 Minuten, 6 Übungen à 30 Sekunden.', next:`Als Erstes: <b>${WARMUP[0].name}</b>` });
+  WARMUP.forEach((w, i) => steps.push({ kind:'move', phase:'warm', dur:w.dur, anim:w.anim, pos:`${i + 1} / ${WARMUP.length}`,
     eyebrow:`Übung ${i + 1} von ${WARMUP.length}`, name:w.name, how:w.how, switchAt:w.switchAt, switchText:w.switchText,
     next: WARMUP[i + 1] ? `Danach: <b>${WARMUP[i + 1].name}</b>` : 'Danach: <b>20 Min AMRAP</b>' }));
-  steps.push({ kind:'prep', phase:'amrap', dur:10, eyebrow:'Gleich: 20 Min AMRAP', name:v.name,
+  steps.push({ kind:'prep', phase:'amrap', dur:10, anim:firstMove && firstMove[0], eyebrow:'Gleich: 20 Min AMRAP', name:v.name,
     how: moves.map(m => `${m.reps} ${m.name}`).join(' · '), next:`So viele Runden wie möglich. <b>${v.needs}</b>` });
   steps.push({ kind:'amrap', phase:'amrap', dur:AMRAP_SEC });
-  steps.push({ kind:'prep', phase:'stretch', dur:10, result:true, eyebrow:'Zeit!', name:'', how:'Durchatmen. Gleich wird gedehnt.', next:`Als Erstes: <b>${STRETCH[0].name}</b>` });
-  STRETCH.forEach((w, i) => steps.push({ kind:'move', phase:'stretch', dur:w.dur, pos:`${i + 1} / ${STRETCH.length}`,
-    eyebrow:`Dehnen ${i + 1} von ${STRETCH.length} · ${w.area}`, name:w.name, how:w.how, switchAt:w.switchAt, switchText:'Seite wechseln',
-    next: STRETCH[i + 1] ? `Danach: <b>${STRETCH[i + 1].name}</b>` : 'Letzte Dehnung – gleich geschafft!' }));
-  return steps;
+  steps.push({ kind:'prep', phase:'stretch', dur:10, anim:STRETCH[0].anim, result:true, eyebrow:'Zeit!', name:'', how:'Durchatmen. Gleich wird gedehnt.', next:`Als Erstes: <b>${STRETCH[0].name}</b>` });
+  return stretchSteps(STRETCH.map(s => [s.id, s.dur]), steps);
 }
 
 function startWorkout(){
+  const stretchOnly = state.settings.tab === 'stretch';
   audioInit(); SFX.tap();
-  const today = dayNum(), v = V(selectedId(today)), level = state.settings.level;
-  const steps = buildSteps(v, level);
+  const today = dayNum(), v = V(selectedId(today)), level = state.settings.level, prog = curProg();
+  const steps = stretchOnly ? buildStretchSteps(prog) : buildSteps(v, level);
   const totals = { warm:0, amrap:0, stretch:0 };
   steps.forEach(s => { totals[s.phase] += s.dur; });
-  run = { v, level, steps, totals, i:0, end:0, paused:false, left:0, over:false,
+  run = { mode: stretchOnly ? 'stretch' : 'workout', prog, v, level, steps, totals, i:0, end:0, paused:false, left:0, over:false,
           rounds:0, splits:[], lastTap:0, fired:new Set(), record:bestFor(v.id, level), session:null, prevBest:0 };
+  [['#pbWarm', 'warm'], ['#pbAmrap', 'amrap'], ['#pbStretch', 'stretch']].forEach(([q, ph]) => {
+    const seg = $(q).parentNode; seg.hidden = !totals[ph]; seg.style.flexGrow = totals[ph];
+  });
+  setStage($('#tStage'), '');
   show('workout');
   $('#tTip').hidden = true;
   lockScreen().then(ok => { if (run && !ok) $('#tTip').hidden = false; });
@@ -753,7 +1324,6 @@ function startWorkout(){
   tick();
 }
 
-const RING_C = 2 * Math.PI * 88;
 function enterStep(i, at, quiet){
   run.i = i;
   const st = run.steps[i];
@@ -767,7 +1337,9 @@ function enterStep(i, at, quiet){
 
   if (isAmrap) {
     $('#wkCount').textContent = `${run.v.name} · ${LVL[run.level]}`;
-    $('#aMoves').innerHTML = movesFor(run.v, run.level).map(m => `<li><b>${m.reps}</b><span>${m.name}</span></li>`).join('');
+    $('#aMoves').innerHTML = movesFor(run.v, run.level).map(m =>
+      `<li><div class="mini" data-anim="${(MOVE_INFO[m.name] || [])[0] || ''}"></div><b>${m.reps}</b><span>${m.name}</span></li>`).join('');
+    $('#aMoves').querySelectorAll('.mini').forEach(d => figure(d, d.dataset.anim));
     $('#aRecord').textContent = run.record || '–';
     $('#rSub').textContent = 'Nach jeder Runde tippen';
   } else {
@@ -778,12 +1350,8 @@ function enterStep(i, at, quiet){
     $('#tNext').innerHTML = st.next || '';
     $('#btnSkip').textContent = st.kind === 'prep' ? (st.result ? 'Weiter' : 'Sofort starten') : 'Überspringen';
     if (i > 0) $('#tTip').hidden = true;
-    const ring = $('#tRing');
-    ring.style.transition = 'none';
-    ring.style.strokeDasharray = RING_C;
-    ring.style.strokeDashoffset = 0;
-    void ring.getBoundingClientRect();
-    ring.style.transition = '';
+    setStage($('#tStage'), st.anim);
+    $('#tBar').style.width = '0%';
   }
   if (!quiet && st.kind !== 'prep') { SFX.go(); buzz(250); }
 }
@@ -804,7 +1372,7 @@ function tick(){
   else {
     const n = String(Math.max(0, Math.ceil(left - 1e-6)));
     const num = $('#tNum'); if (num.textContent !== n) num.textContent = n;
-    $('#tRing').style.strokeDashoffset = (RING_C * (1 - left / st.dur)).toFixed(1);
+    $('#tBar').style.width = (100 * (1 - left / st.dur)).toFixed(1) + '%';
   }
   cues(st, left, elapsed);
   updatePhaseBar(st, elapsed);
@@ -919,6 +1487,12 @@ function openOverlay(mode){
     $('#ovPrimary').textContent = 'Weiter';
     $('#ovSecondary').textContent = 'Training beenden';
     $('#ovSecondary').classList.remove('btn-danger');
+  } else if (run.mode === 'stretch') {
+    $('#ovTitle').textContent = 'Dehnen beenden?';
+    $('#ovText').textContent = 'Du kannst jederzeit wieder einsteigen.';
+    $('#ovPrimary').textContent = 'Weiter dehnen';
+    $('#ovSecondary').textContent = 'Beenden';
+    $('#ovSecondary').classList.add('btn-danger');
   } else {
     $('#ovTitle').textContent = saved ? 'Dehnen beenden?' : 'Abbrechen?';
     $('#ovText').textContent = saved ? 'Deine Runden sind schon gespeichert.' : 'Dieses Training wird nicht gespeichert.';
@@ -948,12 +1522,26 @@ function finishWorkout(){
   clearInterval(loop);
   unlockScreen();
   $('#overlay').hidden = true;
+  if (run.mode === 'stretch') { state.stretches.push({ ts:Date.now(), day:dayNum(), prog:run.prog.id }); persist(); }
   showDone();
 }
 
 /* ================= Abschluss ================= */
 function showDone(){
   show('done');
+  const stretch = run.mode === 'stretch';
+  ['#dScore', '#dUnit', '#dStats'].forEach(q => { $(q).hidden = stretch; });
+  $('#dTitle').textContent = stretch ? 'Gut gedehnt!' : 'Geschafft!';
+  if (stretch) {
+    const today = dayNum(), week = state.stretches.filter(x => today - x.day < 7).length;
+    $('#dMeta').textContent = `Dehnen · ${run.prog.name} · ${fmtDay(today)}`;
+    $('#dBadge').hidden = true;
+    $('#dRest').hidden = true;
+    $('#dCmp').textContent = `${Math.round(progSec(run.prog) / 60)} Minuten Regeneration. In den letzten 7 Tagen ${week}× gedehnt.`;
+    SFX.win();
+    confetti(50);
+    return;
+  }
   const s = run.session;
   $('#dMeta').textContent = `${run.v.name} · ${LVL[run.level]} · ${fmtDay(s.day)}`;
   const isRec = updateDone();
@@ -1074,7 +1662,7 @@ let resetArm = 0;
 $('#btnReset').addEventListener('click', () => {
   const b = $('#btnReset');
   if (Date.now() - resetArm < 4000) {
-    state.sessions = []; state.settings.pick = null; resetArm = 0; persist();
+    state.sessions = []; state.stretches = []; state.skills = {}; state.settings.pick = null; resetArm = 0; persist();
     b.textContent = 'Alles gelöscht'; b.classList.remove('armed');
     renderHome();
     setTimeout(() => { b.textContent = 'Alle Daten löschen'; }, 2000);
@@ -1108,6 +1696,40 @@ document.addEventListener('visibilitychange', () => {
 });
 let rzT;
 window.addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(() => { if (!$('#home').hidden) renderChart(); }, 150); });
+
+document.querySelector('.tabs').addEventListener('click', e => {
+  const b = e.target.closest('[data-tab]'); if (!b || b.dataset.tab === state.settings.tab) return;
+  state.settings.tab = b.dataset.tab; persist(); applyTab();
+  if (b.dataset.tab === 'train') renderChart();
+});
+$('#progList').addEventListener('click', e => {
+  const b = e.target.closest('.prog'); if (!b) return;
+  state.settings.prog = b.dataset.id; persist(); renderStretchTab(); applyTab();
+});
+$('#exList').addEventListener('click', e => { const b = e.target.closest('[data-str]'); if (b) openStretchSheet(b.dataset.str); });
+$('#howto').addEventListener('click', e => { const b = e.target.closest('[data-move]'); if (b) openMoveSheet(b.dataset.move); });
+$('#skillList').addEventListener('click', e => {
+  const view = e.target.closest('[data-view]');
+  if (view) { openSheet({ anim:view.dataset.view, name:view.dataset.title, area:'Skill-Schritt', how:view.dataset.text }); return; }
+  const chk = e.target.closest('.step-check');
+  if (chk) {
+    const id = chk.dataset.skill, i = +chk.dataset.step, done = state.skills[id] || 0;
+    state.skills[id] = i < done ? i : i + 1;
+    persist(); renderSkills();
+    const f = document.getElementById(`st-${id}-${i}`); f && f.focus();
+    if (state.skills[id] > done) { audioInit(); SFX.tap(); buzz(30); }
+    return;
+  }
+  const head = e.target.closest('.skill-head');
+  if (head) {
+    openSkill = openSkill === head.dataset.skill ? null : head.dataset.skill;
+    renderSkills();
+    const f = document.getElementById('sk-' + head.dataset.skill); f && f.focus();
+  }
+});
+$('#shClose').addEventListener('click', closeSheet);
+$('#sheet').addEventListener('click', e => { if (e.target.id === 'sheet') closeSheet(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#sheet').hidden) closeSheet(); });
 
 $('#testbar').hidden = !TEST;
 renderHome();
